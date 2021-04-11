@@ -10,6 +10,7 @@ class EditUser extends React.Component {
     }
 
     async componentDidMount () {
+        console.log(this.props);
         const id = this.props.match.params.id;
         const response = await axios.get(`http://localhost:3004/users/${id}`);
         const user = response.data;
@@ -37,6 +38,7 @@ class EditUser extends React.Component {
         console.log(this.props);
         const updatedUser = {name, mail, contact};
         this.props.onEditUser(id, updatedUser);
+        this.props.history.push("/");
        
     }
 

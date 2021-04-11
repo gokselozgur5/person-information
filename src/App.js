@@ -4,7 +4,7 @@
     import SearchBar from './component/SearchBar';
     import UserList from './component/UserList';
     import AddUser from './component/AddUser';
-
+    import EditUser from './component/EditUser';
 
 
 
@@ -20,7 +20,7 @@
 
         async componentDidMount() {
             const response = await axios.get("http://localhost:3004/users");
-           
+
             this.setState({ users: response.data });
             console.log(response);
         }
@@ -42,7 +42,7 @@
 
 
         searchUser = (event) => {
-           
+
             this.setState({ searchQuery: event.target.value })
         }
 
@@ -52,8 +52,16 @@
             await axios.post(`http://localhost:3004/users/`, user)
 
             this.setState(state => ({
-                users:state.users.concat([user])
+                users: state.users.concat([user])
             }))
+        }
+
+        editUser = async (id, updatedUser) => {
+            await axios.put(`http://localhost:3004/users/${id}`, updatedUser)
+            this.setState(state  => ({
+                users: state.users.concat([updatedUser])
+            }))
+            
         }
 
         render() {
@@ -62,45 +70,55 @@
                 (user) => {
                     return user.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
                 }
-            ).sort( (a, b) => {
+            ).sort((a, b) => {
                 return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
             });
 
             return (
-               
 
+                <Router>
                     <div className="container">
-                     
-                          
 
-                     
+                    <Switch>
+                        <Route path="/" exact>
 
-                                <div className="row">
-                                    <div className="col">
-                                        <SearchBar searchUserProp={this.searchUser} />
-
-                                        <UserList
-                                            users={filteredUsers}
-                                            deleteUserProp={this.deleteUser}
-                                        />
-                                    </div>
+                            <div className="row">
+                                <div className="col">
+                                    <SearchBar searchUserProp={this.searchUser} />
+                                    <UserList
+                                        users={filteredUsers}
+                                        deleteUserProp={this.deleteUser}
+                                    />
                                 </div>
+                            </div>
 
-                          
+                        </Route>
 
-                    
+                        <Route path="/add" render={({ history }) => (
+                            <AddUser onAddUser={(user) => {
+                                this.addUser(user)
+                                history.push("/")
+                            }} />
+                        )} />
 
                       
-                            
-                            
-                            <AddUser 
-                            onAddUser = {(user) => {this.addUser(user)
-                            }} />
-                        
 
+                        <Route path="/edit/:id" exact render={(props) => (
+                    <EditUser
+                    {...props}
+                    onEditUser = {(id, user) => {this.editUser(id, user)
+                      
+                        }
+                }
+                            
+                    />
+                 )} />
+
+
+                        </Switch>
                     </div>
 
-          
+                </Router>
             )
 
         }

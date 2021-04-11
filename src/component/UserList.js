@@ -32,10 +32,10 @@ const UserList = (props) => {
       <td>{user.name}</td>
       <td>{user.mail}</td> 
       <td>{user.contact}</td> 
-      <td><button type="button"
+      <td><Link type="button"
        to={`edit/${user.id}`}
        className="btn btn-md btn-outline-primary" 
-       >Edit</button></td>
+       >Edit</Link></td>
       <td><button className="btn btn-md btn-outline-danger" onClick={(event) => props.deleteUserProp(user)}>Delete</button></td>
        
     </tr>
