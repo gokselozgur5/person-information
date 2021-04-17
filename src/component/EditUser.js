@@ -5,11 +5,12 @@ class EditUser extends React.Component {
 
     state = {
         name: "",
-        mail:"",
-        contact:""
+        mail: "",
+        contact: "",
+        body: ""
     }
 
-    async componentDidMount () {
+    async componentDidMount() {
         console.log(this.props);
         const id = this.props.match.params.id;
         const response = await axios.get(`http://localhost:3004/users/${id}`);
@@ -19,74 +20,82 @@ class EditUser extends React.Component {
         this.setState({
             name: user.name,
             mail: user.mail,
-            contact:user.contact
+            contact: user.contact,
+            body: user.body
         })
 
     }
 
     onInputChange = (e) => {
-         this.setState({
-             [e.target.name]: e.target.value
-         })
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
-  
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const { name,mail,contact} = this.state;
+        const { name, mail, contact, body } = this.state;
         const id = this.props.match.params.id;
         console.log(this.props);
-        const updatedUser = {name, mail, contact};
+        const updatedUser = { name, mail, contact, body };
         this.props.onEditUser(id, updatedUser);
         this.props.history.push("/");
-       
+
     }
 
-    render () {
+    render() {
 
         return (
             <div className="container">
-            <form className="mt-5" onSubmit={this.handleFormSubmit}>
-            <input className="form-control" id="disabledInput" type="text" placeholder="Edit The Form To Update The User.." disabled/>
-                <div className="form-row">
-                    <div className="form-group col-md-12">
-                        <label htmlFor="inputName">Name</label>
-                        <input  type="text" 
-                                className="form-control" 
+                <form className="mt-5" onSubmit={this.handleFormSubmit}>
+                    <input className="form-control" id="disabledInput" type="text" placeholder="Edit The Form To Update The User.." disabled />
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <label htmlFor="inputName">Name</label>
+                            <input type="text"
+                                className="form-control"
                                 name="name"
                                 value={this.state.name}
-                                onChange={this.onInputChange}/>
+                                onChange={this.onInputChange} />
+                        </div>
                     </div>
-                   
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-12">
-                        <label htmlFor="inputImage">Mail</label>
-                        <input 
-                                type="text" 
-                                className="form-control" 
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <label htmlFor="inputImage">Mail</label>
+                            <input
+                                type="text"
+                                className="form-control"
                                 name="mail"
                                 value={this.state.mail}
                                 onChange={this.onInputChange}
-                                />
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-12">
-                        <label htmlFor="contactTextarea">Address</label>
-                        <textarea 
-                                className="form-control" 
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <label htmlFor="contactTextarea">Contact</label>
+                            <textarea
+                                className="form-control"
                                 name="contact" rows="5"
                                 value={this.state.contact}
                                 onChange={this.onInputChange}></textarea>
+                        </div>
                     </div>
-                </div>
-                <input type="submit" className="btn btn-danger btn-block" value="Edit User" />
-            </form>
-        </div>
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <label htmlFor="contactTextarea">Body</label>
+                            <textarea
+                                className="form-control"
+                                name="body" rows="5"
+                                value={this.state.body}
+                                onChange={this.onInputChange}></textarea>
+                        </div>
+                    </div>
+                    <input type="submit" className="btn btn-danger btn-block" value="Edit User" />
+                </form>
+            </div>
         )
     }
 }
-
 
 export default EditUser;

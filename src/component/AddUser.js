@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import serialize from 'form-serialize';
 
 class AddUser extends React.Component {
@@ -29,7 +28,7 @@ class AddUser extends React.Component {
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-12">
-                        <label htmlFor="inputImage">Mail</label>
+                        <label htmlFor="inputMail">Mail</label>
                         <input 
                                 type="text" 
                                 className="form-control" 
@@ -44,7 +43,16 @@ class AddUser extends React.Component {
                                 name="contact" rows="5"></textarea>
                     </div>
                 </div>
-                <input type="submit" className="btn btn-danger btn-block" value="Add Movie" />
+
+                <div className="form-row">
+                    <div className="form-group col-md-12">
+                        <label htmlFor="inputBody">Body</label>
+                        <textarea 
+                                className="form-control" 
+                                name="body" rows="5"></textarea>
+                    </div>
+                </div>
+                <input type="submit" className="btn btn-danger btn-block" value="Add User" />
             </form>
         </div>
         )
