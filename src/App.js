@@ -77,6 +77,7 @@ class App extends React.Component {
                         </Route>
                         <Route path="/add" render={({ history }) => (
                             <AddUser onAddUser={(user) => {
+                                
                                 this.addUser(user)
                                 history.push("/")
                             }} />

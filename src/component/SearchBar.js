@@ -8,9 +8,9 @@ class SearchBar extends React.Component {
     render() {
 
         return (
-            <form className="topbar" onSubmit={this.handleFormSubmit}>
+            <form className="topbar " onSubmit={this.handleFormSubmit}>
                 <div className="form-row mb-5">
-                    <div className="col-4 ">
+                    <div className="col-10 ">
                         <input onChange={this.props.searchUserProp}
                             type="text" className="form-control"
                             placeholder="Search a user name"/>

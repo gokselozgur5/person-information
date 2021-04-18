@@ -36,8 +36,8 @@ const UserList = (props) => {
                             </tr>
 
                             <tr className={"collapse multi-collapse" + i} id={"multiCollapseExample" + i} >
-                                <td colSpan="6" className="collapsible" >
-                                    <div > <p> {user.body}</p></div>
+                                <td colSpan="6" className="collapsible clearfix" >
+                                    <div className="coldiv" > <p> <h4> Address:</h4>{user.body}</p></div>
                                 </td>
                             </tr>
                         </Fragment>

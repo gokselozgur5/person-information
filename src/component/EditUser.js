@@ -1,7 +1,10 @@
 import axios from 'axios';
 import React from 'react';
 
+
 class EditUser extends React.Component {
+
+
 
     state = {
         name: "",
@@ -48,7 +51,7 @@ class EditUser extends React.Component {
         return (
             <div className="container">
                 <form className="mt-5" onSubmit={this.handleFormSubmit}>
-                    <input className="form-control" id="disabledInput" type="text" placeholder="Edit The Form To Update The User.." disabled />
+                    <input className="form-control" style={{textAlign: "center"}} id="disabledInput" type="text" placeholder="Edit The Form To Update The User.." disabled />
                     <div className="form-row">
                         <div className="form-group col-md-12">
                             <label htmlFor="inputName">Name</label>
@@ -56,29 +59,33 @@ class EditUser extends React.Component {
                                 className="form-control"
                                 name="name"
                                 value={this.state.name}
-                                onChange={this.onInputChange} />
+                                onChange={this.onInputChange}
+                                required />
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="form-group col-md-12">
-                            <label htmlFor="inputImage">Mail</label>
+                            <label htmlFor="inputImage">E-Mail</label>
                             <input
-                                type="text"
+                                type="email"
                                 className="form-control"
                                 name="mail"
                                 value={this.state.mail}
                                 onChange={this.onInputChange}
-                            />
+                                required/>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="form-group col-md-12">
-                            <label htmlFor="contactTextarea">Contact</label>
-                            <textarea
+                            <label htmlFor="contactTextarea">Phone  <br></br>Format: 123-123-1234</label>
+                            <input
+                                type="tel"
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                 className="form-control"
                                 name="contact" rows="5"
                                 value={this.state.contact}
-                                onChange={this.onInputChange}></textarea>
+                                onChange={this.onInputChange}
+                                required></input>
                         </div>
                     </div>
                     <div className="form-row">
@@ -88,10 +95,15 @@ class EditUser extends React.Component {
                                 className="form-control"
                                 name="body" rows="5"
                                 value={this.state.body}
-                                onChange={this.onInputChange}></textarea>
+                                onChange={this.onInputChange}
+                                required></textarea>
                         </div>
                     </div>
                     <input type="submit" className="btn btn-danger btn-block" value="Edit User" />
+                    <br></br>
+                   
+                <button type="button" onClick={() =>   this.props.history.push("/")} className="btn btn-secondary w-100">Back</button>
+               
                 </form>
             </div>
         )
